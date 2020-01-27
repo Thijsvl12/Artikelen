@@ -23,7 +23,13 @@ app.post('/iArtikel', function(req, res){
         else return res.json({message:'Artikel Added', docs: docs})
     })
 })
-
+app.post('/sArtikel', function(req, res){
+    let sType = req.body.sType
+    db.artikelen.find({sType: sType}, function(err, docs){
+        if(err)return res.json({mesage:'error', error: err})
+        else return res.json({message:'Artikels Found', docs: docs})
+    })
+})
 app.listen(port, function() {
     console.log('Running RestHub on port ' + port);
 });

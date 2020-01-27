@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Order, OrderItem } from "../../../models/order.model";
 
 @Component({
   selector: 'app-new',
@@ -7,7 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NewComponent implements OnInit {
 
-  constructor() { }
+  constructor() { 
+    let d = new Order()
+    d.iOrderItem(new OrderItem('0', 3.2, 2222222222222))
+    console.log(d.sSubtotaal())
+    console.log(d.sBtw(), 'Btw')
+
+  }
 
   ngOnInit() {
   }
