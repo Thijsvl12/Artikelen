@@ -1,9 +1,6 @@
 <p-table [value]="aArtikelen | async" selectionMode="single" [(selection)]="aArtikel" dataKey="_id">
   <ng-template pTemplate="header" let-columns>
-      <tr>
-          <th>
-            #
-          </th>
+    <tr>
           <th>
             Naam
           </th>
@@ -18,10 +15,7 @@
             {{rowData.sNaam}}
           </td>
           <td>
-
-          </td>
-          <td>
-
+            {{rowData.iPrijs}}
           </td>
       </tr>
   </ng-template>
