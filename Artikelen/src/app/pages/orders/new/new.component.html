@@ -1,22 +1,83 @@
-<p-table [value]="aArtikelen | async" selectionMode="single" [(selection)]="aArtikel" dataKey="_id">
-  <ng-template pTemplate="header" let-columns>
-    <tr>
-          <th>
-            Naam
-          </th>
-          <th>
-            Prijs
-          </th>
-      </tr>
-  </ng-template>
-  <ng-template pTemplate="body" let-rowData>
-      <tr [pSelectableRow]="rowData">
-          <td>
-            {{rowData.sNaam}}
-          </td>
-          <td>
-            {{rowData.iPrijs}}
-          </td>
-      </tr>
-  </ng-template>
-</p-table>
+<div class="container">
+  <div class="my-4 row">
+    <div class="col-3 d-flex flex-column">
+      <h3>Artikelen Lijst</h3>
+      <p-table [value]="aArtikelen | async" selectionMode="single" [(selection)]="aArtikel" dataKey="_id" class="mt-auto">
+        <ng-template pTemplate="header" let-columns>
+          <tr>
+                <th>
+                  Naam
+                </th>
+                <th>
+                  Prijs
+                </th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData>
+            <tr [pSelectableRow]="rowData">
+                <td>
+                  {{rowData.sNaam}}
+                </td>
+                <td>
+                  {{rowData.iPrijs | currency:'EUR'}}
+                </td>
+            </tr>
+        </ng-template>
+      </p-table>
+    </div>
+    <div class="col d-flex flex-column">
+      <div class="mt-auto">
+      <div class="row py-1">
+        <div class="col-2">
+          <span class="font-weight-bold">Ordernr: </span>
+        </div>
+        <div class="col-4">
+          <input type="text" name="ordernr" id="ordernr">
+        </div>
+      </div>
+      <div class="row py-1">
+        <div class="col-2">
+          <span class="font-weight-bold">Aantal: </span>
+        </div>
+        <div class="col-4">
+          <input type="text" name="aantal" id="aantal">
+        </div>
+        <div class="col-2">
+          <button>Toevoegen</button>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+  <div class="row col-12 my-3">
+    <p-table [value]="aArtikelen | async" dataKey="_id" [tableStyle]="{'width.%': 100}" class="w-100">
+      <ng-template pTemplate="header" let-columns>
+        <tr>
+              <th>
+                Aantal
+              </th>
+              <th>
+                Artikel
+              </th>
+              <th>
+                Prijs excl. btw
+              </th>
+              <th>
+                Subtotaal
+              </th>
+          </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-rowData>
+          <tr [pSelectableRow]="rowData" >
+              <td>
+                {{rowData.sNaam}}
+              </td>
+              <td>
+                {{rowData.iPrijs | currency:'EUR'}}
+              </td>
+          </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>
+
