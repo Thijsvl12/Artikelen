@@ -15,7 +15,22 @@ app.use(
     extended: true
   })
 );
-
+app.all('/*', function(req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*'); // restrict it to the required domain
+    res.header(
+      'Access-Control-Allow-Methods',
+      'GET,PUT,POST,DELETE,OPTIONS,PATCH,UPDATE'
+    );
+    res.header(
+      'Access-Control-Allow-Headers',
+      'Origin, Content-type, Accept, X-Access-Token, X-Key, X-Requested-With, Authorization'
+    );
+    if (req.method == 'OPTIONS') {
+      res.status(200).end();
+    } else {
+      next();
+    }
+  });
 app.post('/iArtikel', function(req, res){
     let artikel = req.body.artikel
     db.artikelen.insert(artikel, function(err, docs){
@@ -25,7 +40,8 @@ app.post('/iArtikel', function(req, res){
 })
 app.post('/sArtikel', function(req, res){
     let sType = req.body.sType
-    db.artikelen.find({sType: sType}, function(err, docs){
+    let sQuery = sType?{sType:sType}:{}
+    db.artikelen.find(sQuery, function(err, docs){
         if(err)return res.json({mesage:'error', error: err})
         else return res.json({message:'Artikels Found', docs: docs})
     })

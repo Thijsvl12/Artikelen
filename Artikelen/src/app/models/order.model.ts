@@ -1,3 +1,5 @@
+import {Deserializable} from "./deserializable.model"
+
 export class Order {
     aArtikels:Array<OrderItem> = []
     iSubtotaalInc:number = 0
@@ -26,6 +28,11 @@ export class Order {
     sBtw():string{
         return '%'+this.iBTW
     }
+
+    deserialize(input: any) {
+        Object.assign(this, input);
+        return this;
+      }
 }
 
 export class OrderItem{
@@ -47,4 +54,9 @@ export class OrderItem{
     sSubTotaal():string{
         return '€'+this.iSubTotaal.toFixed(2).replace('.', ',').replace(/\d(?=(\d{3})+\,)/g, '$&.');
     }
+
+    deserialize(input: any) {
+        Object.assign(this, input);
+        return this;
+      }
 }

@@ -1,11 +1,18 @@
+import {Deserializable} from "./deserializable.model"
+
 export class Artikel {
-    sNaam:String = ""
+    sNaam:string = ""
     iPrijs:Number = 0
-    sType:String=""
+    sType:string=""
 
     constructor(sType = "artikel"){
         this.sType = sType
     }
+
+    deserialize(input: any) {
+        Object.assign(this, input);
+        return this;
+      }
 }
 
 export class CombiArtikel extends Artikel{

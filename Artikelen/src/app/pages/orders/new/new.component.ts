@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Order, OrderItem } from "../../../models/order.model";
+import {take} from "rxjs/operators"
+import { DataService } from 'src/app/services/data.service';
+import { Artikel } from 'src/app/models/artikel.model';
 
 @Component({
   selector: 'app-new',
@@ -7,13 +10,10 @@ import { Order, OrderItem } from "../../../models/order.model";
   styleUrls: ['./new.component.scss']
 })
 export class NewComponent implements OnInit {
-
-  constructor() { 
-    let d = new Order()
-    d.iOrderItem(new OrderItem('0', 3.2, 2222222222222))
-    console.log(d.sSubtotaal())
-    console.log(d.sBtw(), 'Btw')
-
+  aArtikelen
+  aArtikel
+  constructor(private ds: DataService) { 
+    this.aArtikelen = ds.getArtikelen()
   }
 
   ngOnInit() {
